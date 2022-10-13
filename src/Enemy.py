@@ -1,4 +1,3 @@
-from logging import _Level
 from utils.GeneralFunction import makeDiceRoll
 
 class Enemy:
@@ -42,8 +41,8 @@ class Enemy:
     def _getDescription(self):
         return self._description
     def _giveXP(self, roundsTillDeath):
-        if _Level * (30 - roundsTillDeath) > 10:
-            return _Level * (30 - roundsTillDeath)
+        if self._level * (30 - roundsTillDeath) > 10:
+            return self._level * (30 - roundsTillDeath)
         else :
             return 10
     def _getAttackMove(self):

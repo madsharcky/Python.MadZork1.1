@@ -3,7 +3,7 @@ class Door:
     def __init__(self):
         self._locked = False
         self._visible = True
-        self._name = "Standard Door"
+        self._name = "Parent Door"
     def _isLocked(self):
         return self._locked
     def _isVisible(self):
@@ -12,6 +12,8 @@ class Door:
         self._locked = False
     def _closeDoor(self):
         self._locked = True
+    def _getName(self):
+        return self._name
         
 class TrapDoor(Door):
     def __init__(self):

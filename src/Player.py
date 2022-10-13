@@ -1,3 +1,4 @@
+from os import name, system
 from random import randint
 from utils.GeneralFunction import makeDiceRoll
 from utils.GeneralFunction import getListofChildClasses
@@ -94,8 +95,6 @@ class Player:
             return False
     def getMoney(self):
         return self._money
-    def getHealth(self):
-        return self._health
     def dropItem(self, item, room):        
         if item in self._items:
             self._items.remove(item) #TODO Check if all items are droped or only one
@@ -166,6 +165,10 @@ class Player:
         return self._damage
     def getName(self):
         return self._name
+    def getMaxHealth(self):
+        return self._maxhealth
+    def getHealth(self):
+        return self._health
     
 class Warrior(Player):
     def __init__(self):
@@ -209,14 +212,15 @@ def selectClass():
     classList = getListofChildClasses(Player)
 
     while playerClass == None:
+        system('cls' if name == 'nt' else 'clear')
         print("Select a class:")
         for cls in classList:
             print(str(classList.index(cls)+1), ". ", cls.__name__)
         selection = input(">")
         if selection.isdigit() and int(selection) <= len(classList) and int(selection) > 0:
-            playerClass = classList[int(selection)-1]
-            print("You selected the class: ", playerClass.__name__)
-            print(classNamesAndDescriptions[playerClass.__name__])
+            playerClass = classList[int(selection)-1]()
+            print("You selected the class: ", playerClass._name)
+            print(classNamesAndDescriptions[playerClass._name])
             print ("Are you sure you want to select this class? (y/n)")
             if input(">") != "y":
                 playerClass = None            
