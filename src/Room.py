@@ -4,19 +4,9 @@
 # room.removeItem(item)
 from resources.RoomDescriptions import getRandomDescription
 from utils.GeneralFunction import getRandomChildClass
+from utils.GeneralFunction import makeDiceRoll
 import src.Item as ItemFile
-def listOfChildClassesItem(file):
-    classes = dir(file)
-    items = []
-    for method in classes:
-        if method.startswith("__"):
-            continue
-        if method == "Item":
-            continue
-        else:
-            items.append(method)
-    return items
-
+import src.Enemy as EnemyFile
 
 
 class Room:
@@ -33,18 +23,28 @@ class Room:
         self.__makeItems()
         self.__makeDoors()
 
-    def __makeEnemies(self):        
-        pass
+    def __makeEnemies(self):
+        maxAmount = 0
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
+            maxAmount += 1
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.5:
+            maxAmount += 1
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.75:
+            maxAmount += 1        
+        for i in range(1, makeDiceRoll(0, maxAmount)):
+            self.__enemies.append(getRandomChildClass(EnemyFile.Enemy)())
     def __makeItems(self):
+        maxAmount = 0
         if not self.__player.hasKeys():
             self.__items.append(ItemFile.Key())
         if self.__player.getHealth() < self.__player.getMaxHealth()*0.75:
-            self.__items.append(getRandomChildClass(ItemFile.Item)())
+            maxAmount += 1
         if self.__player.getHealth() < self.__player.getMaxHealth()*0.5:
-            self.__items.append(getRandomChildClass(ItemFile.Item)())
+            maxAmount += 1
         if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
+            maxAmount += 1
+        for i in range(1, makeDiceRoll(0, maxAmount)):
             self.__items.append(getRandomChildClass(ItemFile.Item)())
-        
     def __makeDoors(self):
         pass
     
