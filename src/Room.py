@@ -3,7 +3,8 @@
 # room.getItems()
 # room.removeItem(item)
 from resources.RoomDescriptions import getRandomDescription
-
+from utils.GeneralFunction import getRandomChildClass
+import src.Item as ItemFile
 def listOfChildClassesItem(file):
     classes = dir(file)
     items = []
@@ -32,10 +33,18 @@ class Room:
         self.__makeItems()
         self.__makeDoors()
 
-    def __makeEnemies():        
+    def __makeEnemies(self):        
         pass
-    def __makeItems():
-        pass
-    def __makeDoors():
+    def __makeItems(self):
+        if not self.__player.hasKeys():
+            self.__items.append(ItemFile.Key())
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.75:
+            self.__items.append(getRandomChildClass(ItemFile.Item)())
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.5:
+            self.__items.append(getRandomChildClass(ItemFile.Item)())
+        if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
+            self.__items.append(getRandomChildClass(ItemFile.Item)())
+        
+    def __makeDoors(self):
         pass
     
