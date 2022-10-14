@@ -67,9 +67,13 @@ import pyfiglet
 print(pyfiglet.figlet_format("Mad Zork", font = "digital" ))
 
 __ValiduserInputs = [
-    "go", "north", "soth", "east", "west", "back", "quit", "exit", "help", "inventory", "look", "take", "drop", "use", "open", "close", "talk", "attack", "fight", "run", 
-    "search", "explore", "examine", "drink", "up", "down", "left", "right", "all", "everything", "nothing", "no", "yes", "y", "n"
-]
+    "go", "north", "soth", "east", "west", "back", "up", "down", "left", "right",
+    "quit", "help", "inventory", "map", 
+    "look", "take", "explore", "examine", "search",
+    "drop", "use", "open", "close", "drink", 
+    "all", "everything", "nothing", "no", "yes", "y", "n", "do", "don't", 
+    "kick", "stab", "hit", "attack", "fight", "run", "retreat", "flee"
+    ]
 def __getUserInput():
     """
     Returns a String with the user input
