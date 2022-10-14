@@ -62,3 +62,26 @@
 #                 }
 #             }    
 #         return returnString;
+
+import pyfiglet
+print(pyfiglet.figlet_format("Mad Zork", font = "digital" ))
+
+userInputs = [
+    "go", "north", "soth", "east", "west", "back", "quit", "exit", "help", "inventory", "look", "take", "drop", "use", "open", "close", "talk", "attack", "fight", "run", 
+    "search", "explore", "examine", "drink", "up", "down", "left", "right", "all", "everything", "nothing", "no", "yes", "y", "n"
+]
+def getUserInput():
+    """
+    Returns a String with the user input
+    """
+    userInput = input(">")
+    return userInput
+def validateUserInput(userInput):
+    """
+    Returns a boolean if a word in the user input is valid
+    """
+    userInput = userInput.lower()
+    for word in userInput.split():
+        if word in userInputs:
+            return True
+    return False
