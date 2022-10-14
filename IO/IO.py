@@ -107,3 +107,4 @@ def getCommandFromUserInput():
         print("I don't understand that")
         userInput = __getUserInput()
     return __getCommands(userInput)
+print(getCommandFromUserInput())

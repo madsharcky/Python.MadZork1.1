@@ -1,7 +1,5 @@
-from os import name, system
-from random import randint
 from utils.GeneralFunction import makeDiceRoll
-from utils.GeneralFunction import getListofChildClasses
+from resources.ClassNamesAndDescriptions import classNamesAndDescriptions
 
 class Player:
     def __init__(self):
@@ -207,29 +205,3 @@ class Assassin(Player):
     def _levelUpClassBonus(self):
         self._evasion += 1
     
-def selectClass():
-    playerClass = None
-    classList = getListofChildClasses(Player)
-
-    while playerClass == None:
-        system('cls' if name == 'nt' else 'clear')
-        print("Select a class:")
-        for cls in classList:
-            print(str(classList.index(cls)+1), ". ", cls.__name__)
-        selection = input(">")
-        if selection.isdigit() and int(selection) <= len(classList) and int(selection) > 0:
-            playerClass = classList[int(selection)-1]()
-            print("You selected the class: ", playerClass._name)
-            print(classNamesAndDescriptions[playerClass._name])
-            print ("Are you sure you want to select this class? (y/n)")
-            if input(">") != "y":
-                playerClass = None            
-        else:
-            print("Invalid input.")
-    return playerClass
-
-classNamesAndDescriptions = {"Player": "The base class for all player classes. This class should not be used directly.",
-                             "Assassin": "You are good at dodging attacks and get a +1 Bonus on your evasion each time you level up.", 
-                             "Tank": "You are strong and can carry more items. You get a bonus +5 health each time you level up.", 
-                             "Warrior": "You are good in fighting and get a +1 Bonus on your damage each time you level up."
-                            }
