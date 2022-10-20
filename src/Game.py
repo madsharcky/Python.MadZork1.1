@@ -14,17 +14,12 @@ class Game:
         self._urrentEnemy = None
 
         IOLogic.printWelcome(self)
-        self.__player = IOLogic.selectClass()
-        self.__currentRoom = Room(self.__player)
+        self._player = IOLogic.selectClass()
+        self._currentRoom = Room(self._player)
 
 
     def play(self):
         while (not self._finished):
-            system('cls' if name == 'nt' else 'clear')
-            print("You are a", self.__player.getName(), "and standing in a room.")
-            print(self.__currentRoom.getDirections())
-            print("What do you do?")
-            command = input(">")
-            if (command == "quit"):
-                self.__finished = True
+            command = IOLogic.printStanding(self)
+            IOLogic.executeCommand(command, self)
         print("Thanks for playing!")

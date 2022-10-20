@@ -85,6 +85,20 @@ class Player:
             if item.isKey():
                 keys.append(item)
         return keys
+    def getLevel(self):
+        return self._level
+    def getXp(self):
+        return self._xp
+    def getXpToLevelUp(self):
+        return self._xpToLevelUp()
+    def getAtackChance(self):
+        return self._attackChance
+    def getEvasion(self):
+        return self._evasion
+    def getCarryAmount(self):
+        return self._carryAmount()
+    def getCarryCapacity(self):
+        return self._carryCapacity
 
     def hasKeys(self):
         if len(self._getKeys()) > 0:
@@ -128,16 +142,6 @@ class Player:
         self._xp += xp
         if self._xp >= self._xpToLevelUp:            
             self._levelUp()
-    def getStats(self):
-        xpRemaining = self._xpToLevelUp() - self._xp
-        output = "Level: " + str(self._level)
-        output += "\tXP: " + str(self._xp) + "/" + str(self._xpToLevelUp) + " (" + str(xpRemaining) + " remaining)"
-        output += "\tHealth: " + str(self._health) + "/" + str(self._maxhealth)
-        output += "\tAttack: " + str(self._attackChance)
-        output += "\tDefense: " + str(self._evasion)
-        output += "\tCarry Capacity: " + str(self._carryAmount) + "/" + str(self._carryCapacity)
-        output += "\tMoney: " + str(self._money)
-        return output
     def defend(self, atackChance):
         if makeDiceRoll() + self._evasion > atackChance:
             return True

@@ -67,19 +67,14 @@ import pyfiglet
 print(pyfiglet.figlet_format("Mad Zork", font = "digital" ))
 
 __ValiduserInputs = [
-    "go", "north", "soth", "east", "west", "back", "up", "down", "left", "right",
+    "go", "back", "north", "soth", "east", "west", "up", "down", "left", "right",
     "quit", "help", "inventory", "map", 
-    "look", "take", "explore", "examine", "search",
-    "drop", "use", "open", "close", "drink", 
+    "look", "explore", "examine", "search",
+    "drop", "take", "use", "drink", "open", "close",  
     "all", "everything", "nothing", "no", "yes", "y", "n", "do", "don't", 
-    "kick", "stab", "hit", "attack", "fight", "run", "retreat", "flee"
+    "kick", "stab", "hit", "attack", "fight", "punch", "kill", "run", "retreat", "flee"
     ]
-def __getUserInput():
-    """
-    Returns a String with the user input
-    """
-    userInput = input(">")
-    return userInput
+
 def __validateUserInput(userInput):
     """
     Returns a boolean if a word in the user input is valid
@@ -102,9 +97,8 @@ def getCommandFromUserInput():
     """
     Prompts the User to make an Input and returns a list of comands if the input is valid
     """
-    userInput = __getUserInput()
+    userInput = input(">")
     while not __validateUserInput(userInput):
         print("I don't understand that")
-        userInput = __getUserInput()
+        userInput = input(">")
     return __getCommands(userInput)
-print(getCommandFromUserInput())
