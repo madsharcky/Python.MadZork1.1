@@ -54,43 +54,71 @@ def printStanding(game):
 def executeCommand(command, game):
     if command.__contains__("quit"):
         print ("Are you sure you want to quit the game? (y/n)")
-        if input(">").lower() == "y" or input(">") == "yes":
+        if input(">").lower() == "y" or input(">").lower() == "yes":
             game._finished = True
     else:
-        for word in command:
-            if word == "go":
+        iterator = iter(command)
+        for word in iterator:
+            if word == "go":          
+                direction = checkifWordIsDirection(next(iterator, None))
+                if direction == None:
+                    print("I do not know where you want to go.")                    
+                else:
+                    goToRoom(direction, game)
                 pass
-            if word == "help":
+            elif word == "help":
+                printHelp()
+            elif word == "inventory":
+                printInventory(game._player)
+            elif word == "map":
+                printMap()
+            elif word == "look" or word == "explore" or word == "search" or word == "examine":
+                exploreRoom(game._currentRoom)
+            elif word == "take":
                 pass
-            if word == "inventory":
+            elif word == "drop":
                 pass
-            if word == "map":
+            elif word == "use":
                 pass
-            if word == "look":
+            elif word == "drink":
                 pass
-            if word == "explore" or word == "search" or word == "examine":
+            elif word == "open":
                 pass
-            if word == "attack":
+            elif word == "kick" or word == "punch" or word == "hit" or word == "attack" or word == "fight" or word == "kill" or word == "stab":
                 pass
-            if word == "take":
+            elif word == "run" or word == "flee" or word == "retreat":
                 pass
-            if word == "drop":
-                pass
-            if word == "use":
-                pass
-            if word == "drink":
-                pass
-            if word == "open":
-                pass
-            if word == "close":
-                pass
-            if word == "kick" or word == "punch" or word == "hit" or word == "attack" or word == "fight" or word == "kill" or word == "stab":
-                pass
-            if word == "run" or word == "flee" or word == "retreat":
-                pass
-            
-            
-        
-    print("Press any key to continue...")
-    input()
+        print("Press any key to continue...")
+        input()
     
+def goToRoom(direction, game): #TODO complete this function
+    pass
+def checkifWordIsDirection(word):
+    if word == None:
+        return None
+    elif word == "north" or word == "up":
+        return "north"
+    elif word == "south" or word == "down":
+        return "south"
+    elif word == "east" or word == "right":
+        return "east"
+    elif word == "west" or word == "left":
+        return "west"
+def printHelp():
+    print("This is a list of accepted commands:")
+    string = ""
+    for word in IO.getValidUserInputs():
+        string += word + ", "
+    string = string[:-2]
+    print(string)
+def printInventory(player):
+    print("You are carrying:")
+    if len(player._items) == 0:
+        print("Nothing")
+    else:
+        for item in player._items:
+            print(item.getName())
+def printMap(): #TODO complete this function
+    pass
+def exploreRoom(room): #TODO complete this function
+    pass

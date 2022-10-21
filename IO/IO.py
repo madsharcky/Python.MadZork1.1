@@ -70,10 +70,15 @@ __ValiduserInputs = [
     "go", "back", "north", "soth", "east", "west", "up", "down", "left", "right",
     "quit", "help", "inventory", "map", 
     "look", "explore", "examine", "search",
-    "drop", "take", "use", "drink", "open", "close",  
+    "drop", "take", "use", "drink", "open",  
     "all", "everything", "nothing", "no", "yes", "y", "n", "do", "don't", 
     "kick", "stab", "hit", "attack", "fight", "punch", "kill", "run", "retreat", "flee"
     ]
+def getValidUserInputs():
+    """
+    Returns a list of all valid user inputs
+    """
+    return __ValiduserInputs
 
 def __validateUserInput(userInput):
     """
