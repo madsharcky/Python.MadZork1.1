@@ -24,14 +24,15 @@ class Room:
 
     def __makeEnemies(self):
         maxAmount = 1
-        if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
+        if self.__player.getHealth() > self.__player.getMaxHealth()*0.25:
             maxAmount += 1
-        if self.__player.getHealth() < self.__player.getMaxHealth()*0.5:
+        if self.__player.getHealth() > self.__player.getMaxHealth()*0.5:
             maxAmount += 1
-        if self.__player.getHealth() < self.__player.getMaxHealth()*0.75:
-            maxAmount += 1        
+        if self.__player.getHealth() > self.__player.getMaxHealth()*0.75:
+            maxAmount += 1      
+        randomAmount = makeDiceRoll(0, maxAmount)  
         for i in range(1, makeDiceRoll(0, maxAmount)):
-            self.__enemies.append(getRandomChildClass(EnemyFile.Enemy))
+            self.__enemies.append(getRandomChildClass(EnemyFile.Enemy)(self.__player))
     def __makeItems(self):
         maxAmount = 1
         if not self.__player.hasKeys():
@@ -42,8 +43,9 @@ class Room:
             maxAmount += 1
         if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
             maxAmount += 1
+        randomAmount = makeDiceRoll(0, maxAmount)
         for i in range(1, makeDiceRoll(0, maxAmount)):
-            self.__items.append(getRandomChildClass(ItemFile.Item))
+            self.__items.append(getRandomChildClass(ItemFile.Item)())
     def __makeDoors(self):
         self.__doors = {
             "north": None,
@@ -53,7 +55,7 @@ class Room:
         }
         for i in range(4):
             if makeDiceRoll(1, 100) > 50:
-                self.__doors[getDirectionFromInt(i)] = getRandomChildClass(DoorFile.Door)
+                self.__doors[getDirectionFromInt(i)] = getRandomChildClass(DoorFile.Door)()
     def getDescription(self):
         return self.__description
     def getItems(self):

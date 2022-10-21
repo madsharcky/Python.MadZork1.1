@@ -36,7 +36,7 @@ class Enemy:
             return True
     def makeDamage(self):
         return self._damage
-    def _getName(self):
+    def getName(self):
         return self._name
     def _getDescription(self):
         return self._description
@@ -46,7 +46,7 @@ class Enemy:
         else :
             return 10
     def _getAttackMove(self):
-        return "The ", self._getName, " runs toward you. ", self._getDescription, "\n", self._selectRandomAttackMove()
+        return "The ", self.getName, " runs toward you. ", self._getDescription, "\n", self._selectRandomAttackMove()
     
 class OwlbearSkeleton(Enemy):
     def __init__(self, player):
@@ -105,8 +105,8 @@ class HumanZombie(Enemy):
 class Ghoul(Enemy):
     def __init__(self, player):
         super().__init__(player)
-        self._name = "Human Zombie"
-        self._description = "A Zombie of a Human"
+        self._name = "Ghoul"
+        self._description = "A Ghoul of a Human"
         self._health = self._level * 5
         self._attackChance = self._level
         self._defense = self._level

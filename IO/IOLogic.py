@@ -121,4 +121,9 @@ def printInventory(player):
 def printMap(): #TODO complete this function
     pass
 def exploreRoom(room): #TODO complete this function
-    pass
+    print ("All the Items in the room:")
+    for item in room.getItems():
+        print (item.getName())
+    print("All the Enemies in the room:")
+    for enemy in room.getEnemies():
+        print(enemy.getName())

@@ -5,7 +5,7 @@ def getListofChildClasses(parentClass):
 
 def getRandomChildClass(parentClass):
     listOfChildClasses = [cls for cls in parentClass.__subclasses__()]
-    return random.choice(listOfChildClasses)()
+    return random.choice(listOfChildClasses)
 
 def makeDiceRoll(minValue = 1, nrOfSides = 20):
         return random.randint(minValue, nrOfSides)
