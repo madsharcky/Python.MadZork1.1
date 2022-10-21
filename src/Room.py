@@ -29,8 +29,7 @@ class Room:
         if self.__player.getHealth() > self.__player.getMaxHealth()*0.5:
             maxAmount += 1
         if self.__player.getHealth() > self.__player.getMaxHealth()*0.75:
-            maxAmount += 1      
-        randomAmount = makeDiceRoll(0, maxAmount)  
+            maxAmount += 1       
         for i in range(1, makeDiceRoll(0, maxAmount)):
             self.__enemies.append(getRandomChildClass(EnemyFile.Enemy)(self.__player))
     def __makeItems(self):
@@ -43,7 +42,6 @@ class Room:
             maxAmount += 1
         if self.__player.getHealth() < self.__player.getMaxHealth()*0.25:
             maxAmount += 1
-        randomAmount = makeDiceRoll(0, maxAmount)
         for i in range(1, makeDiceRoll(0, maxAmount)):
             self.__items.append(getRandomChildClass(ItemFile.Item)())
     def __makeDoors(self):
