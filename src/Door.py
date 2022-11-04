@@ -1,6 +1,8 @@
 from utils.GeneralFunction import makeDiceRoll
 class Door:
-    def __init__(self):
+    def __init__(self, creatorRoom):
+        self._creatorRoom = creatorRoom
+        self._nextRoom = None
         self._locked = False
         self._visible = True
         self._name = "Parent Door"
@@ -14,10 +16,24 @@ class Door:
         self._locked = True
     def _getName(self):
         return self._name
+    def gothroughDoor(self, player):
+        if self._locked:
+            return "locked"
+        elif self._name == "Trap Door":
+            return "trap"
+        elif player.hasCrossedDoor(self):
+            return "crossed"
+        else:
+            return "normal"
+    def goThroughDoor(self, player):
+        player.crossDoor(self)
+        if self._nextRoom == None:
+            return "trap"
+        
         
 class TrapDoor(Door):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, creatorRoom):
+        super().__init__(creatorRoom)
         self._name = "Trap Door"
         self._attackChance = makeDiceRoll()
         self.__damage = makeDiceRoll(10)
@@ -32,16 +48,16 @@ class TrapDoor(Door):
     def makeDamage(self):
         return self.__damage
 class StandardDoor(Door):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, creatorRoom):
+        super().__init__(creatorRoom)
         self._name = "Standard Door"
 class LockedDoor(Door):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, creatorRoom):
+        super().__init__(creatorRoom)
         self._name = "Locked Door"
         self._locked = True
 class SecretDoor(Door):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, creatorRoom):
+        super().__init__(creatorRoom)
         self._name = "Secret Door"
         self._visible = False

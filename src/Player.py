@@ -28,7 +28,15 @@ class Player:
         self.alcoholSips = 0
         # States
         self.isFighting = False
-    
+        self._crossedDoors = []
+        
+    def crossDoor(self, door):
+        if self._crossedDoors.__contains__(door):
+            self._crossedDoors.__delitem__(self._crossedDoors.index(door))
+        else:
+            self._crossedDoors.append(door)
+    def getIsFighting(self):
+        return self.isFighting    
     def _levelUp(self):
         self._level += 1
         self._xp -= self._xpToLevelUp()

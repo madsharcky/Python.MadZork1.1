@@ -59,13 +59,15 @@ def executeCommand(command, game):
     else:
         iterator = iter(command)
         for word in iterator:
-            if word == "go":          
-                direction = checkifWordIsDirection(next(iterator, None))
-                if direction == None:
-                    print("I do not know where you want to go.")                    
+            if word == "go":
+                if (game._player.getIsFighting()):
+                    print("You can't just walk away from a fight!")
                 else:
-                    goToRoom(direction, game)
-                pass
+                    direction = checkifWordIsDirection(next(iterator, None))
+                    if direction == None:
+                        print("I do not know where you want to go.")                    
+                    else:
+                        goToRoom(direction, game)
             elif word == "help":
                 printHelp()
             elif word == "inventory":
@@ -92,11 +94,12 @@ def executeCommand(command, game):
         input()
     
 def goToRoom(direction, game): #TODO complete this function
-    pass
+    if game._currentRoom.getDoor(direction) == None:
+        print("There is no door in that direction.")
+    else:
+        pass
 def checkifWordIsDirection(word):
-    if word == None:
-        return None
-    elif word == "north" or word == "up":
+    if word == "north" or word == "up":
         return "north"
     elif word == "south" or word == "down":
         return "south"
@@ -104,6 +107,10 @@ def checkifWordIsDirection(word):
         return "east"
     elif word == "west" or word == "left":
         return "west"
+    elif word == "back":
+        return "back"
+    else:
+        return None
 def printHelp():
     print("This is a list of accepted commands:")
     string = ""

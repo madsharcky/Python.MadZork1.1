@@ -53,7 +53,7 @@ class Room:
         }
         for i in range(4):
             if makeDiceRoll(1, 100) > 50:
-                self.__doors[getDirectionFromInt(i)] = getRandomChildClass(DoorFile.Door)()
+                self.__doors[getDirectionFromInt(i)] = getRandomChildClass(DoorFile.Door)(self)
     def getDescription(self):
         return self.__description
     def getItems(self):
